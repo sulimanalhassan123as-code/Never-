@@ -1,168 +1,85 @@
-:root {
-  --bg1: #f8fafc;
-  --bg2: #eef1f7;
-  --card: #ffffff;
-  --accent: #1a73e8;
-  --text: #202124;
-  --muted: #5f6368;
-  --shadow: 0 8px 20px rgba(60, 64, 67, 0.15);
-  --radius: 28px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* === Modern Google-Style Design === */
 body {
   margin: 0;
-  font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
-  background: linear-gradient(180deg, var(--bg1), var(--bg2));
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px 16px;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.logo {
-  font-size: 28px;
-}
-
-.title {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.hero {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  padding: 40px 20px;
-  max-width: 600px;
-  width: 100%;
-  animation: fadeIn 0.8s ease-out;
-}
-
-.hero-title {
-  font-size: 26px;
-  margin-bottom: 20px;
-  color: var(--text);
-}
-
-.search-form {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  color: #fff;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #dadce0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: #fff;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.3s ease;
 }
 
-.search-form:focus-within {
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.3);
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.search-form input[type="search"] {
-  flex: 1;
-  padding: 14px 16px;
-  border: none;
-  font-size: 16px;
-  outline: none;
-}
-
-.search-form button {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-
-.search-form button:hover {
-  background: #1559c1;
-}
-
-.hint {
-  margin-top: 14px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.results {
-  margin-top: 24px;
-  max-width: 700px;
-  width: 100%;
-}
-
-.result-card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-  transition: transform 0.15s ease;
-}
-
-.result-card:hover {
-  transform: translateY(-3px);
-}
-
-.result-title {
-  font-size: 18px;
-  margin-bottom: 6px;
-  color: var(--accent);
-}
-
-.result-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.result-domain {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.result-snippet {
-  color: #444;
-}
-
-.footer {
-  margin-top: 40px;
-  color: var(--muted);
-  font-size: 13px;
+.container {
   text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.logo {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 640px) {
-  .hero {
-    padding: 28px 16px;
-  }
-  .hero-title {
-    font-size: 22px;
-  }
-  .search-form input[type="search"] {
-    font-size: 15px;
-  }
+.tagline {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+button {
+  background: #fff;
+  color: #333;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #4285F4;
+  color: #fff;
+}
+
+.info {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+footer {
+  margin-top: 15px;
+  font-size: 0.8rem;
+  color: #ccc;
 }
