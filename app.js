@@ -1,61 +1,49 @@
-// public/js/app.js
-const form = document.getElementById('searchForm');
-const resultsEl = document.getElementById('results');
-const input = document.getElementById('q');
+// === Google Custom Search Integration ===
+// Replace these placeholders with your actual API key and Search Engine ID:
+const API_KEY = "PASTE_YOUR_API_KEY_HERE";
+const SEARCH_ENGINE_ID = "PASTE_YOUR_SEARCH_ENGINE_ID_HERE";
 
-function escapeHtml(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+const form = document.getElementById("search-form");
+const queryInput = document.getElementById("query");
+const resultsDiv = document.getElementById("results");
 
-function renderLoading(q){
-  resultsEl.innerHTML = `
-    <div class="result-card">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="spinner" aria-hidden="true">⏳</div>
-        <div>Searching for "<strong>${escapeHtml(q)}</strong>"...</div>
-      </div>
-    </div>
-  `;
-}
-
-function renderResults(data){
-  if(!data || !data.items || data.items.length===0){
-    resultsEl.innerHTML = `<div class="result-card"><div>No results found for "<strong>${escapeHtml(data?.query||'')}</strong>".</div></div>`;
-    return;
-  }
-  resultsEl.innerHTML = data.items.map(it=>`
-    <article class="result-card">
-      <a class="result-link" href="${escapeHtml(it.link)}" target="_blank" rel="noopener">
-        <div class="result-domain">${escapeHtml(it.displayLink||'')}</div>
-        <h3 class="result-title">${escapeHtml(it.title)}</h3>
-      </a>
-      <p class="result-snippet">${escapeHtml(it.snippet||'')}</p>
-    </article>
-  `).join('');
-}
-
-async function doSearch(q){
-  renderLoading(q);
-  try{
-    const res = await fetch(`/.netlify/functions/search?q=${encodeURIComponent(q)}`);
-    if(!res.ok){
-      const txt = await res.text();
-      resultsEl.innerHTML = `<div class="result-card">Error: ${escapeHtml(txt)}</div>`;
-      return;
-    }
-    const data = await res.json();
-    renderResults(data);
-  }catch(err){
-    resultsEl.innerHTML = `<div class="result-card">Network error. Try again later.</div>`;
-  }
-}
-
-form.addEventListener('submit', (e)=>{
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const q = input.value.trim();
-  if(!q) return;
-  doSearch(q);
+  const query = queryInput.value.trim();
+  if (!query) return;
+
+  resultsDiv.innerHTML = "<p>Searching...</p>";
+
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${encodeURIComponent(query)}`
+    );
+
+    if (!response.ok) throw new Error("Search request failed");
+
+    const data = await response.json();
+    displayResults(data.items);
+  } catch (error) {
+    console.error(error);
+    resultsDiv.innerHTML = "<p>Something went wrong. Check your API key or CX.</p>";
+  }
 });
 
-// Optional: allow clicking result domain to open in new tab (handled by anchor)
-// Optional: support "I'm feeling lucky" later
+function displayResults(items) {
+  if (!items || items.length === 0) {
+    resultsDiv.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  resultsDiv.innerHTML = items
+    .map(
+      (item) => `
+      <div class="result-item">
+        <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+        <p>${item.snippet}</p>
+        <a class="link" href="${item.link}" target="_blank">${item.link}</a>
+      </div>
+    `
+    )
+    .join("<hr>");
+}
