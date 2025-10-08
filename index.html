@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Search Engine</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">🔎</div>
+        <div class="title">My Search</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1 class="hero-title">Search the web — fast</h1>
+      <form id="searchForm" class="search-form" role="search">
+        <input id="q" name="q" type="search" placeholder="Type your query and press Enter" aria-label="Search" autocomplete="off" />
+        <button type="submit" aria-label="Search">Search</button>
+      </form>
+      <p class="hint">Powered by Google Custom Search (API &amp; CX hidden in Netlify Functions)</p>
+    </section>
+
+    <section id="results" class="results" aria-live="polite"></section>
+
+    <footer class="footer">
+      <small>Built for demo • Configure <code>GOOGLE_API_KEY</code> and <code>GOOGLE_CX</code> as Netlify environment variables.</small>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
