@@ -1,94 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SmartCalc — Suleiman</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 280px;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 2rem;
+      text-align: right;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      outline: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #2E7D32;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2E7D32;
+      text-align: center;
+    }
+  </style>
 </head>
-<body> 
-  <footer style="position: fixed; bottom: 10px; left: 0; width: 100%; text-align: center; font-weight: bold; color: #2E7D32;">
-    Powered by Suleiman Alhassan
-</footer><div class="calculator">
-  <div class="display"></div>
-
-  <div class="buttons">
-    <button>C</button>
-    <button>/</button>
-    <button>*</button>
-    <button>-</button>
-
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>+</button>
-
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>.</button>
-
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>0</button>
-
-    <button class="equal">=</button>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" class="display" disabled>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteChar()">DEL</button>
+      <button onclick="appendOperator('%')">%</button>
+      <button onclick="appendOperator('/')">÷</button>
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button onclick="appendOperator('*')">×</button>
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button onclick="appendOperator('-')">−</button>
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button onclick="appendOperator('+')">+</button>
+      <button onclick="appendNumber('0')">0</button>
+      <button onclick="appendNumber('.')">.</button>
+      <button onclick="calculateResult()" style="grid-column: span 2; background:#1B5E20;">=</button>
+    </div>
   </div>
 
-  <button class="download-btn">📥 Download History</button>
-</footer
-  <main class="app" role="main" aria-labelledby="app-title">
-    <h1 id="app-title" class="visually-hidden">SmartCalc</h1>
+  <footer>Powered by Suleiman Alhassan</footer>
 
-    <section class="calculator" aria-label="Calculator">
-      <div class="display" id="display" aria-live="polite">
-        <div class="expression" id="expression"></div>
-        <div class="result" id="result">0</div>
-      </div>
+  <script>
+    const display = document.getElementById('display');
 
-      <div class="keys" role="group" aria-label="Calculator keys">
-        <!-- row 1 -->
-        <button class="btn fn" data-action="clear">AC</button>
-        <button class="btn fn" data-action="toggle-sign">±</button>
-        <button class="btn fn" data-action="percent">%</button>
-        <button class="btn op" data-value="/">÷</button>
+    function appendNumber(num) {
+      display.value += num;
+    }
 
-        <!-- row 2 -->
-        <button class="btn num" data-value="7">7</button>
-        <button class="btn num" data-value="8">8</button>
-        <button class="btn num" data-value="9">9</button>
-        <button class="btn op" data-value="*">×</button>
+    function appendOperator(op) {
+      display.value += op;
+    }
 
-        <!-- row 3 -->
-        <button class="btn num" data-value="4">4</button>
-        <button class="btn num" data-value="5">5</button>
-        <button class="btn num" data-value="6">6</button>
-        <button class="btn op" data-value="-">−</button>
+    function clearDisplay() {
+      display.value = '';
+    }
 
-        <!-- row 4 -->
-        <button class="btn num" data-value="1">1</button>
-        <button class="btn num" data-value="2">2</button>
-        <button class="btn num" data-value="3">3</button>
-        <button class="btn op" data-value="+">+</button>
+    function deleteChar() {
+      display.value = display.value.slice(0, -1);
+    }
 
-        <!-- row 5 -->
-        <button class="btn wide num" data-value="0">0</button>
-        <button class="btn num" data-value=".">.</button>
-        <button class="btn equal" data-action="calculate">=</button>
-      </div>
-    </section>
-
-    <section class="history" aria-label="Calculation history">
-      <h2 class="sr">History</h2>
-      <ul id="historyList" class="history-list"></ul>
-      <div class="history-actions">
-        <button id="clearHistory">Clear History</button>
-        <a id="downloadHistory" href="#" download="calc-history.txt">Download</a>
-      </div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
+    function calculateResult() {
+      try {
+        display.value = eval(display.value.replace('÷', '/').replace('×', '*'));
+      } catch {
+        display.value = 'Error';
+      }
+    }
+  </script>
 </body>
-</html>
+        </html>
