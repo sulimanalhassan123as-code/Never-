@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartCalc — Suleiman</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app" role="main" aria-labelledby="app-title">
+    <h1 id="app-title" class="visually-hidden">SmartCalc</h1>
+
+    <section class="calculator" aria-label="Calculator">
+      <div class="display" id="display" aria-live="polite">
+        <div class="expression" id="expression"></div>
+        <div class="result" id="result">0</div>
+      </div>
+
+      <div class="keys" role="group" aria-label="Calculator keys">
+        <!-- row 1 -->
+        <button class="btn fn" data-action="clear">AC</button>
+        <button class="btn fn" data-action="toggle-sign">±</button>
+        <button class="btn fn" data-action="percent">%</button>
+        <button class="btn op" data-value="/">÷</button>
+
+        <!-- row 2 -->
+        <button class="btn num" data-value="7">7</button>
+        <button class="btn num" data-value="8">8</button>
+        <button class="btn num" data-value="9">9</button>
+        <button class="btn op" data-value="*">×</button>
+
+        <!-- row 3 -->
+        <button class="btn num" data-value="4">4</button>
+        <button class="btn num" data-value="5">5</button>
+        <button class="btn num" data-value="6">6</button>
+        <button class="btn op" data-value="-">−</button>
+
+        <!-- row 4 -->
+        <button class="btn num" data-value="1">1</button>
+        <button class="btn num" data-value="2">2</button>
+        <button class="btn num" data-value="3">3</button>
+        <button class="btn op" data-value="+">+</button>
+
+        <!-- row 5 -->
+        <button class="btn wide num" data-value="0">0</button>
+        <button class="btn num" data-value=".">.</button>
+        <button class="btn equal" data-action="calculate">=</button>
+      </div>
+    </section>
+
+    <section class="history" aria-label="Calculation history">
+      <h2 class="sr">History</h2>
+      <ul id="historyList" class="history-list"></ul>
+      <div class="history-actions">
+        <button id="clearHistory">Clear History</button>
+        <a id="downloadHistory" href="#" download="calc-history.txt">Download</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
