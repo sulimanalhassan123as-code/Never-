@@ -78,6 +78,16 @@
   </style>
 </head>
 <body>
+  <link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(() => {
+        console.log('Service Worker Registered');
+      });
+    });
+  }
+</script>
   <div class="calculator">
     <input type="text" id="display" class="display" disabled />
     <div class="buttons">
