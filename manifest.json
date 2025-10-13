@@ -1,11 +1,10 @@
 {
-  "name": "Suleiman Calculator",
+  "name": "Calculator App",
   "short_name": "Calculator",
-  "start_url": "index.html",
+  "start_url": "/Never-/index.html",
   "display": "standalone",
-  "background_color": "#2E7D32",
+  "background_color": "#f0f0f0",
   "theme_color": "#2E7D32",
-  "description": "A clean, simple calculator powered by Suleiman Alhassan.",
   "icons": [
     {
       "src": "icon-192.png",
